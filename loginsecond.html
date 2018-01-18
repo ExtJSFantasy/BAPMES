@@ -282,11 +282,12 @@
 									type:'post',
 									success:function(data){
 										//刷新当前界面
-										setTimeout(function(){
+										/*setTimeout(function(){
 											var wobj = plus.webview.currentWebview(); 
 				                    			wobj.reload(true);
 				                    			wobj.show()
-										}, 200)
+										}, 200)*/
+										window.location.reload(true);
 									},
 									error:function(e){
 										mui.toast("重置失败！")

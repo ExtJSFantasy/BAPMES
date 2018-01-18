@@ -137,10 +137,6 @@
 							mui('#mterialid')[0].focus();
 						}, 0);
 					},
-					/*testmaterial: function() { //箱条码.扫描箱条码之后自动开始 验证
-						var _this = this;
-						_this.backtrack(_this.val,_this.val2);
-					},*/
 					begining: function() {
 						var ptxm = document.getElementById("inputid").value;
 						var wxtm = document.getElementById("mterialid").value;
@@ -165,7 +161,6 @@
 					backtrack: function(pm,xtm) { //返回数据
 						var _this = this;
 						var _rwdid = _this.taskInfo.a;
-						//console.log(_this.taskInfo.a);
 						
 						//先验证作业指导书是否正常
 						mui.ajax(urlinstrutor,{
@@ -176,11 +171,11 @@
 							type:'get',			//HTTP请求类型
 							timeout:60000,		//超时时间设置为30秒；
 							beforeSend: function() {
-						        plus.nativeUI.showWaiting("加载中。。。");
+						        //plus.nativeUI.showWaiting("加载中。。。");
 						        mask.show();//显示遮罩层
 						    },
 						    complete: function() {
-						        plus.nativeUI.closeWaiting();
+						        //plus.nativeUI.closeWaiting();
 						        mask.close();//关闭遮罩层
 						    },
 							success:function(data,textStatus,xhr){
@@ -195,16 +190,14 @@
 									type: 'post', //HTTP请求类型
 									timeout: 10000, //超时时间设置为10秒;
 									beforeSend: function() {
-								        plus.nativeUI.showWaiting("加载中。。。");
+								       // plus.nativeUI.showWaiting("加载中。。。");
 								        mask.show();//显示遮罩层
 								    },
 								    complete: function() {
-								        plus.nativeUI.closeWaiting();
+								        //plus.nativeUI.closeWaiting();
 								        mask.close();//关闭遮罩层
 								    },
 									success: function(data2) {
-										
-										//console.log(JSON.stringify(data2[0]));
 										//缓存登陆成功后返回的数据
 										data2.forEach(function(item, index) {
 											//console.log(item.mage);
@@ -221,13 +214,11 @@
 												//记录该箱子的开始时间
 												var boxstime = new Date();
 												var _boxsdate = boxstime.getFullYear()+"-"+((boxstime.getMonth() < 10 ? ("0"+(boxstime.getMonth()+1)) : (boxstime.getMonth()+1)))+"-"+boxstime.getDate()+"  "+boxstime.getHours()+":"+(boxstime.getMinutes() < 10 ? ("0"+boxstime.getMinutes()) : boxstime.getMinutes());
-												//setLsItem("_boxsdate");
 												//当前箱开始的时间boxcsdate
 												_this.currentStation.data.boxcsdate = _boxsdate;
 												var _mdetails = data2[0];
 												_mdetails.startDate = _boxsdate;
 												_mdetails.endDate = null;
-												//console.log("=============", _this.currentStation.data.material);
 												_this.currentStation.data.material.mdetails.push(_mdetails);
 													//跳转到作业指导书界面
 													var _data = eval(data);
@@ -240,7 +231,6 @@
 												            } 
 														}
 													)
-													//clicked('instructor.html',true,true,{},{response: _data})
 											}else if(item.mage == '1') {
 												mui.toast('人员条形码无效');
 												mask.close();
@@ -289,7 +279,6 @@
 															}else{
 																data.data[0].sxksdate = FormatDate(data.data[0].sxksdate);
 															}
-															//console.log(data.data[0].sxwcdate == null);
 															if(data.data[0].sxwcdate == '' || data.data[0].sxwcdate == null){
 																data.data[0].sxwcdate = '';
 															}else{
@@ -306,13 +295,11 @@
 													}
 												})
 											} else if(item.mage == '5' ){
-												//mui.toast("任务单id不符合");
 												mui.toast("该箱条码不在该任务单中！");
 												mask.close();
 											} else if(item.mage == '6'){
 												mui.toast("有更早的零件需要生产");
 												mask.close();
-												//给一个任务清单提示
 											}
 										});
 									},
@@ -362,9 +349,10 @@
 									success:function(data){
 										//刷新当前界面
 										setTimeout(function(){
-											var wobj = plus.webview.currentWebview(); 
+											/*var wobj = plus.webview.currentWebview(); 
 				                    			wobj.reload(true);
-				                    			wobj.show()
+				                    			wobj.show()*/
+				                    			window.location.reload(true);
 										}, 200)
 									},
 									error:function(e){

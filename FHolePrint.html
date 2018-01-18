@@ -262,9 +262,10 @@
 								//console.log(JSON.stringify(outdata));
 								if(outdata.success == 1){
 									mui.toast("打印成功！");
-									var wobj = plus.webview.getWebviewById("FHolePrint.html");
+									window.location.reload(true);
+									/*var wobj = plus.webview.getWebviewById("FHolePrint.html");
 						            wobj.reload(true);
-						            wobj.show();
+						            wobj.show();*/
 								}
 							})
 						})
@@ -282,9 +283,10 @@
 								var _data = outdata.success;
 								if(outdata.success == 1){
 									mui.toast("打印成功！");
-									var wobj = plus.webview.getWebviewById("FHolePrint.html");
+									window.location.reload(true);
+									/*var wobj = plus.webview.getWebviewById("FHolePrint.html");
 						            wobj.reload(true);
-						            wobj.show();
+						            wobj.show();*/
 								}
 							})
 						})

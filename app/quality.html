@@ -510,11 +510,11 @@
 									type: 'post',
 									timeout: 10000,
 									beforeSend: function() {
-										plus.nativeUI.showWaiting("加载中。。。");
+										//plus.nativeUI.showWaiting("加载中。。。");
 										mask.show(); //显示遮罩层
 									},
 									complete: function() {
-										plus.nativeUI.closeWaiting();
+										//plus.nativeUI.closeWaiting();
 										mask.close(); //关闭遮罩层
 									},
 									success: function(data2) {
@@ -534,11 +534,11 @@
 											timeout: 10000, //超时时间设置为10秒；
 											//headers:{'Content-Type':'application/json'},	
 											beforeSend: function() {
-												plus.nativeUI.showWaiting("加载中。。。");
+												//plus.nativeUI.showWaiting("加载中。。。");
 												mask.show(); //显示遮罩层
 											},
 											complete: function() {
-												plus.nativeUI.closeWaiting();
+												//plus.nativeUI.closeWaiting();
 												mask.close(); //关闭遮罩层
 											},
 											success: function(data) {

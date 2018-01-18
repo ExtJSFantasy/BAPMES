@@ -176,32 +176,6 @@
 			} else {
 				document.addEventListener('plusready', plusReady, false);
 			}
-			var nativeWebview, imm, InputMethodManager;
-			var initNativeObjects = function() {
-				if (mui.os.android) {
-					var main = plus.android.runtimeMainActivity();
-					var Context = plus.android.importClass("android.content.Context");
-					InputMethodManager = plus.android.importClass("android.view.inputmethod.InputMethodManager");
-					imm = main.getSystemService(Context.INPUT_METHOD_SERVICE);
-				} else {
-					nativeWebview = plus.webview.currentWebview().nativeInstanceObject();
-				}
-			};
-			var showSoftInput = function() {
-				if (mui.os.android) {
-					imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
-				} else {
-					nativeWebview.plusCallMethod({
-						"setKeyboardDisplayRequiresUserAction": false
-					});
-				}
-				setTimeout(function() {
-					var inputElem = document.querySelector('input');
-					inputElem.focus();
-					inputElem.parentNode.classList.add('mui-active'); //第一个是search，加上激活样式
-				}, 200);
-			};
-			
 			
 			function plusReady(){
 //				initNativeObjects();
@@ -249,7 +223,7 @@
 						var _xid = _this.loginData.id;
 						
 						var _arr = ["确定","取消"];
-    					plus.nativeUI.confirm(" 下一箱?",function(e){
+    					mui.confirm(" 下一箱?","下一箱",_arr,function(e){
     						//console.log(e.index);
 	    					if(e.index == 0){
 	    						mui.ajax(url+'app/getsxjxxendbyid',{
@@ -260,11 +234,11 @@
 									type:'post',//HTTP请求类型
 									timeout:10000,//超时时间设置为10秒；      
 									beforeSend: function() {
-								        plus.nativeUI.showWaiting("加载中。。。");
+								        //plus.nativeUI.showWaiting("加载中。。。");
 								        mask.show();//显示遮罩层
 								    },
 								    complete: function() {
-								        plus.nativeUI.closeWaiting();
+								        //plus.nativeUI.closeWaiting();
 								        mask.close();//关闭遮罩层
 								    },
 									success:function(data){
@@ -283,7 +257,7 @@
 	    					}else{
 	    						
 	    					}
-	    				},"下一箱",_arr)
+	    				})
 	    			},
 	    			//取消当前箱操作
 	    			cancelNowBox:function(){
@@ -314,11 +288,11 @@
 							timeout:10000,
 							type:'post',
 							beforeSend: function() {
-						        plus.nativeUI.showWaiting("取消中。。。");
+						        //plus.nativeUI.showWaiting("取消中。。。");
 						        mask.show();//显示遮罩层
 						    },
 						    complete: function() {
-						        plus.nativeUI.closeWaiting();
+						        //plus.nativeUI.closeWaiting();
 						        mask.close();//关闭遮罩层
 						    },
 							success:function(data){
@@ -335,11 +309,11 @@
 									timeout:10000,
 									type:'post',
 									beforeSend: function() {
-								        plus.nativeUI.showWaiting("取消中。。。");
+								        //plus.nativeUI.showWaiting("取消中。。。");
 								        mask.show();//显示遮罩层
 								    },
 								    complete: function() {
-								        plus.nativeUI.closeWaiting();
+								        //plus.nativeUI.closeWaiting();
 								        mask.close();//关闭遮罩层
 								    },
 									success:function(data){
@@ -383,7 +357,7 @@
 							    							createNew:true
 							    						})*/
 							    						//clicked("../index.html", true, true,{},{});
-							    						var curr = plus.webview.currentWebview();
+							    						/*var curr = plus.webview.currentWebview();
 														var wvs = plus.webview.all();
 														for (var i = 0, len = wvs.length; i < len; i++) {
 						                                    //关闭除setting页面外的其他页面
@@ -393,7 +367,11 @@
 														}
 						                                //打开index界面
 														plus.webview.open('../index.html');
-														curr.close();
+														curr.close();*/
+														mui.openWindow({
+															url:'../index.html',
+															id:'index'
+														})
 													}else{
 														mui.toast("服务器异常")
 													}
