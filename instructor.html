@@ -53,10 +53,12 @@
 				-webkit-justify-content: center;
 				justify-content: center;
 			}
-			.my-instructor-fontsize{
+			
+			.my-instructor-fontsize {
 				font-size: .7rem;
 			}
-			.my-releasedate-font{
+			
+			.my-releasedate-font {
 				font-size: 2rem;
 			}
 		</style>
@@ -96,7 +98,8 @@
 										</div>
 										<div v-text="item.screeningreworkcontent"></div>
 										<div>发布日期</div>
-										<div v-text="item.releasedate" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;"></div><!--style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;" -->
+										<div v-text="item.releasedate" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;"></div>
+										<!--style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;" -->
 									</div>
 									<div class="row_4 floor_1_right_row">
 										<div>筛选方法</div>
@@ -113,18 +116,18 @@
 									<div>图一：</div>
 									<div>图二：</div>
 									<div class="img_show">
-										<img v-bind:src="item.img01" />
+										<img v-bind:src="item.imgUrl1" />
 									</div>
 									<div class="img_show">
-										<img v-bind:src="item.img02" alt="" />
+										<img v-bind:src="item.imgUrl2" alt="" />
 									</div>
 									<div>图三：</div>
 									<div>图四：</div>
 									<div class="img_show">
-										<img v-bind:src="item.img03" alt="" />
+										<img v-bind:src="item.imgUrl3" alt="" />
 									</div>
 									<div class="img_show">
-										<img v-bind:src="item.img04" alt="" />
+										<img v-bind:src="item.imgUrl4" alt="" />
 									</div>
 								</div>
 								<div class="floor_2_right">
@@ -141,7 +144,7 @@
 										<div v-text="item.steps1" class="my-instructor-fontsize"></div>
 										<div id="one" @tap="open1(index)" class="my-instructor-fontsize" v-text="item.operationcontent1"></div>
 										<div v-text="item.riticalelement1" class="my-instructor-fontsize"></div>
-										<div v-text="item.remark1" ></div>
+										<div v-text="item.remark1"></div>
 									</div>
 									<div class="floor_2_right_row context">
 										<div>2</div>
@@ -160,24 +163,24 @@
 									<div class="floor_2_right_row context">
 										<div>4</div>
 										<div v-text="item.steps4" class="my-instructor-fontsize"></div>
-										<div id="four" @tap="open4(index)" class="my-instructor-fontsize" v-text="item.operationcontent4" ></div>
+										<div id="four" @tap="open4(index)" class="my-instructor-fontsize" v-text="item.operationcontent4"></div>
 										<div v-text="item.riticalelement4" class="my-instructor-fontsize"></div>
-										<div v-text="item.remark4" ></div>
+										<div v-text="item.remark4"></div>
 									</div>
 								</div>
 							</div>
 							<div class="floor_3">
 								<div>
 									<p>编制(提出方)：</p>
-									<p class="signit"><img v-bind:src="item.img05" alt="" /></p>
+									<p class="signit"><img v-bind:src="item.imgUrl5" alt="" /></p>
 								</div>
 								<div>
 									<p>SQ会签</p>
-									<p class="signit"><img v-bind:src="item.img06" alt="" /></p>
+									<p class="signit"><img v-bind:src="item.imgUrl6" alt="" /></p>
 								</div>
 								<div>
 									<p>SQ经理批准：</p>
-									<p class="signit"><img v-bind:src="item.img07" alt="" /></p>
+									<p class="signit"><img v-bind:src="item.imgUrl7" alt="" /></p>
 								</div>
 								<div>
 									<p>QD会签：</p>
@@ -191,18 +194,20 @@
 						</div>
 					</div>
 				</div>
-				<div class="mui-content-padded" id="showScan">
+				<div class="mui-content-padded" id="showScan" @click="start">
 					<p>
-						<a  id="scan" @click="start" class="floating-button">开始</a>
+						<a id="scan" class="floating-button">开始</a>
 					</p>
 				</div>
 			</div>
 		</div>
 		<script src="js/swiper-3.4.2.jquery.min.js"></script>
 		<script src="js/swiper-3.4.2.min.js"></script>
-		<script type="text/javascript" src="js/common.js" ></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/function.js"></script>
+		<script type="text/javascript" src="js/static.js"></script>
 		<script src="js/function.js" type="text/javascript" charset="utf-8"></script>
-		<script> 
+		<script>
 			if(mui.plus) {
 				plusReady()
 			} else {
@@ -223,10 +228,10 @@
 						items: ''
 					},
 					created: function() {
-						
-						_response.forEach(function(item,index){
-							for(var key in item){
-							    if(item[key] == 'null' || item[key] == 'undefined') item[key] = '';
+
+						_response.forEach(function(item, index) {
+							for(var key in item) {
+								if(item[key] == 'null' || item[key] == 'undefined') item[key] = '';
 							}
 						})
 						this.items = _response;
@@ -234,14 +239,18 @@
 					mounted: function() {
 						var _this = this;
 						//console.log(JSON.stringify(_this.items));
-						
+
 					},
 					beforeMount: function() {
 						//console.log("beforeMount");
 					},
 					methods: {
 						start: function() {
-							clicked("app/main.html", true, true,{},{});
+							mui.openWindow({
+								url: 'app/main.html',
+								id: 'main'
+							})
+							//clicked("app/main.html", true, true,{},{});
 						},
 						open1: function(index) {
 							//console.log(index);
@@ -261,50 +270,63 @@
 						}
 					}
 				});
-				
+
 				var timer = null;
-				timer = setTimeout(function(){
+				timer = setTimeout(function() {
 					new Swiper('.swiper-container', {
 						//autoplay: 5000,
 						direction: 'horizontal',
 						//loop: true
 					});
 					timer = null;
-				},0);
-						
+				}, 0);
+
 			};
-			/*window.onload = function() {
+			window.onload = function() {
 				var app2 = new Vue({
 					el: '#main',
 					data: {
 						items: [],
-						isShow: false
+						isShow: false,
+						taskInfo: JSON.parse(getLsItem('station_' + JSON.parse(getLsItem("currentStation")))).data.taskInfo,
 					},
 					mounted: function() {
 						var _this = this;
 						var timer = null;
-						mui.ajax('http://eqms-web.chinacloudapp.cn:10000/VAC/service/OperationInstructForPad.groovy', {
+						mui.ajax(urlxds + "getInstrutor", {
 							data: {
-								id: 834
+								rwdid: _this.taskInfo.a
 							},
-							dataType: 'script', //服务器返回json格式数据
+							dataType: 'json', //服务器返回json格式数据
 							type: 'get', //HTTP请求类型
 							timeout: 60000, //超时时间设置为10秒；	              
 							success: function(data) {
-								var _data = eval(data);
-								_this.items = _data;
+								data.data.forEach(function(item, index) {
+									item.imgUrl1 = "http://192.168.1.70:3000" + item.imgUrl1;
+									item.imgUrl2 = "http://192.168.1.70:3000" + item.imgUrl2;
+									item.imgUrl3 = "http://192.168.1.70:3000" + item.imgUrl3;
+									item.imgUrl4 = "http://192.168.1.70:3000" + item.imgUrl4;
+									item.imgUrl5 = "http://192.168.1.70:3000" + item.imgUrl5;
+									item.imgUrl6 = "http://192.168.1.70:3000" + item.imgUrl6;
+									item.imgUrl7 = "http://192.168.1.70:3000" + item.imgUrl7;
+									for(var key in item) {
+										if(item[key] == 'null' || item[key] == 'undefined') item[key] = '';
+									}
+								})
+								_this.items = data.data;
+
 								console.log(_this.items);
-								if(_this.items != ''){
-									timer = setTimeout(function(){
+								if(_this.items != '') {
+									timer = setTimeout(function() {
 										new Swiper('.swiper-container', {
 											//autoplay: 5000,
 											direction: 'horizontal',
 											//loop: true
 										});
 										timer = null;
-									},0);
+									}, 0);
 								}
-								
+
 							},
 							error: function(xhr, type, errorThrown) {
 								//异常处理；
@@ -323,7 +345,7 @@
 						}
 					}
 				});
-			}*/
+			}
 		</script>
 	</body>
 

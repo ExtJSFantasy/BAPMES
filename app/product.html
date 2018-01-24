@@ -221,21 +221,24 @@
 					var timer = null;
 					var _this = this;
 					_this.dis = true;
-					//console.log(_this.loginData);
+					console.log(_this.loginData);
 					//任务单号
 					var _rwdId = _this.loginData.rwdid;
 					//零件编码
 					var _ljbm = _this.loginData.ljbm;
+					console.log(_ljbm+'88888');
 					//零件名称
 					var _ljname = _this.loginData.ljname;
 					//箱条码
 					var _xtm = _this.loginData.xtm;
 					//零件数量
 					var _ljsl = _this.loginData.ljsl;
+					console.log(_ljsl);
 					//包装id
 					var _pid = _this.loginData.pid;
 					//包装数量
 					var _pcount = _this.loginData.pcount;
+					console.log(_pcount);
 					//箱id
 					var _xid = _this.loginData.id;
     				/*if(_ljsl > 0){
@@ -265,6 +268,7 @@
 						
 						timer = null;
 					}, 0);
+					console.log(_ljbm);
 					mui.prompt("当前零件表编号:"+_ljbm, '请输入最小包装数', '请先在质量里报交不合格品', btnArray, function(e) {
 						if(e.index == 1) {
 							//console.log( e.value);
@@ -277,11 +281,11 @@
 									type:'post',
 									timeout:10000,
 									beforeSend: function() {
-								        plus.nativeUI.showWaiting("加载中。。。");
+								        //plus.nativeUI.showWaiting("加载中。。。");
 								        mask.show();//显示遮罩层
 								    },
 								    complete: function() {
-								        plus.nativeUI.closeWaiting();
+								        //plus.nativeUI.closeWaiting();
 								        mask.close();//关闭遮罩层
 								    },
 									success:function(data){
@@ -329,7 +333,14 @@
 															_this.okDatas = _this.currentStation.data.productData.okData
 														}
 														setLsItem('station_'+JSON.parse(getLsItem('currentStation')), JSON.stringify(_this.currentStation));
-														print2(2, function(data){
+														for(var i=0;i<_this.currentStation.data.productData.okData.length;i++){
+																if(_this.currentStation.data.productData.okData[i].txm == data){
+																	_this.currentStation.data.productData.okData[i].printok = true;
+																	_this.okDatas = _this.currentStation.data.productData.okData
+																	setLsItem('station_'+JSON.parse(getLsItem('currentStation')), JSON.stringify(_this.currentStation));
+																}
+															}
+														/*print2(2, function(data){
 															for(var i=0;i<_this.currentStation.data.productData.okData.length;i++){
 																if(_this.currentStation.data.productData.okData[i].txm == data){
 																	_this.currentStation.data.productData.okData[i].printok = true;
@@ -337,11 +348,7 @@
 																	setLsItem('station_'+JSON.parse(getLsItem('currentStation')), JSON.stringify(_this.currentStation));
 																}
 															}
-															/*var wobj = plus.webview.currentWebview();  
-												            	wobj.reload(true);
-												            	wobj.show();*/
-															
-														});
+														});*/
 														_this.dis = false;
 													}else if(item.mage == 1){
 														_this.dis = false;

@@ -382,9 +382,9 @@
 						var _this = this;
 						var timer = null;
 						var _rwdid = _this.taskInfo.a;
-						mui.ajax(vacurl+'GetOIData.groovy', {
+						mui.ajax(urlxds+"getInstrutor", {
 							data: {
-								id: _rwdid
+								rwdid: _rwdid
 							},
 							dataType: 'script', //服务器返回json格式数据
 							type: 'get', //HTTP请求类型

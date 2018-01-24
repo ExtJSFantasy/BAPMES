@@ -104,7 +104,7 @@
 			}
 			var mask = mui.createMask();//遮罩层
 			var urlbacktrack = url + "app/sxbeginbybm";
-			var urlinstrutor = vacurl+"GetOIData.groovy";
+			var urlinstrutor = urlxds+"getInstrutor";
 			var vm = new Vue({
 				el: '#box',
 				data: {
@@ -165,7 +165,7 @@
 						//先验证作业指导书是否正常
 						mui.ajax(urlinstrutor,{
 							data:{
-								id:_this.taskInfo.a,//_id
+								rwdid:_this.taskInfo.a,//_id
 							},
 							//dataType:'script',//服务器返回json格式数据
 							type:'get',			//HTTP请求类型

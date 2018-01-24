@@ -338,6 +338,7 @@
 					if(_this.currentStation.data.qualityData.defectInfo.length == 0) {
 						_this.initDefectInfo();
 					}
+					//_this.initDefectInfo();
 					_this.initData();
 				},
 				filters: {
@@ -363,16 +364,16 @@
 						var _this = this
 						var _rwdId = _this.taskInfo.a;
 						//console.log(_rwdId);getDefectData.groovy
-						mui.ajax(vacurl+'getDefectData.groovy', {
+						mui.ajax(urlxds+'getDefectInfo', {
 							data: {
-								id: _rwdId //_rwdId
+								rwdid: _rwdId //_rwdId
 							},
 							//dataType:'json',//服务器返回json格式数据
 							type: 'get', //HTTP请求类型
 							timeout: 10000, //超时时间设置为10秒；	              
 							success: function(data) {
-								var _data = eval(data);
-								//console.log("===========", _data);
+								var _data = data.data;
+								console.log("===========", _data);
 								for(var i = 0; i < _data.length; i++) { //为data增加num，num1,showFlow,input3属性
 									_data[i].num = 0;
 								}
@@ -443,12 +444,14 @@
 						var btnArray = ['确定', '取消'];
 						var _myData = _this.currentStation.data.qualityData.nokData;
 						if(_this.nowNokNum <= 0) {
+							_this.dis = false;
 							mui.toast("请录入缺陷信息！！！");
 							return;
 						}
 						//判断是否已经提交过了。根据箱条码
 						if(_myData.length > 0){
 							if(_myData[_myData.length-1].bxtm2 == _this.loginData.xtm){
+								_this.dis = false;
 								mui.toast("已提交！");
 								return;
 							}
@@ -574,8 +577,26 @@
 																	//_this.nokDatas = quickSort(_this.currentStation.data.qualityData.nokData,"endDate1",true)
 																}
 																setLsItem('station_' + JSON.parse(getLsItem('currentStation')), JSON.stringify(_this.currentStation));
+																for(var i = 0; i < _this.currentStation.data.qualityData.nokData.length; i++) {
+																		if(_this.currentStation.data.qualityData.nokData[i].bxtm == bxtm) {
+																			_this.currentStation.data.qualityData.nokData[i].bprintok = true;
+																			setLsItem('station_' + JSON.parse(getLsItem('currentStation')), JSON.stringify(_this.currentStation));
+																		}
+																	}
+
+																	//清除数据
+																	_this.nowNokNum = 0
+																	_this.defectNum = 0
+																	var _defectInfo = _this.currentStation.data.qualityData.defectInfo;
+																	_defectInfo.forEach(function(item, index) {
+																		item.num = 0
+																	})
+
+																	_this.defectInfo = _defectInfo
+																	_this.currentStation.data.qualityData.defectInfo = _defectInfo;
+																	_this.dis = false;
 																//console.log(data);
-																print2(1, function(bxtm) {
+																/*print2(1, function(bxtm) {
 																	for(var i = 0; i < _this.currentStation.data.qualityData.nokData.length; i++) {
 																		if(_this.currentStation.data.qualityData.nokData[i].bxtm == bxtm) {
 																			_this.currentStation.data.qualityData.nokData[i].bprintok = true;
@@ -586,13 +607,7 @@
 																	//清除数据
 																	_this.nowNokNum = 0
 																	_this.defectNum = 0
-																	//console.log('tttttttttttttttt');
-																	//console.log(JSON.stringify(_this.currentStation.data.qualityData.nokData));
 																	var _defectInfo = _this.currentStation.data.qualityData.defectInfo;
-																	
-																	/*_this.defectInfo.forEach(function(item,index){
-																		item.num = 0
-																	})*/
 																	_defectInfo.forEach(function(item, index) {
 																		item.num = 0
 																	})
@@ -600,12 +615,7 @@
 																	_this.defectInfo = _defectInfo
 																	_this.currentStation.data.qualityData.defectInfo = _defectInfo;
 																	_this.dis = false;
-
-
-																	/*var wobj = plus.webview.currentWebview();  
-					            	wobj.reload(true);
-					            	wobj.show();*/
-																});
+																});*/
 													} else if(item.mage == 1) {
 														_this.dis = false;
 														mask.close(); //关闭遮罩层
