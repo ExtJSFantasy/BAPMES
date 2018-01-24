@@ -12,6 +12,8 @@
 		<script type="text/javascript" src="../js/vue.min.js"></script>
 		<script type="text/javascript" src="../js/function.js"></script>
 		<script type="text/javascript" src="../js/static.js"></script>
+		<script type="text/javascript" src="../js/cfprint.min.js" ></script>
+		<script type="text/javascript" src="../js/cfprint_ext.js" ></script>
 		<style type="text/css">
 			html,
 			body {
@@ -215,6 +217,7 @@
 						</div>
 						<div class="mui-card-footer">
 							<button type="button" v-bind:disabled="dis" class="mui-btn mui-btn-green mui-btn-block" style="border: 1px solid #f0ad4e;background-color: #f0ad4e;" @click="submitNowNokNum">不合格品报交</button>
+							<button type="button" class="mui-btn mui-btn-green mui-btn-block" style="border: 1px solid #f0ad4e;background-color: #f0ad4e;margin-left: 2vh;">切换打印机</button>
 						</div>
 					</div>
 				</div>
@@ -366,7 +369,7 @@
 						//console.log(_rwdId);getDefectData.groovy
 						mui.ajax(urlxds+'getDefectInfo', {
 							data: {
-								rwdid: _rwdId //_rwdId
+								rwdid: '3796'//_rwdId //_rwdId
 							},
 							//dataType:'json',//服务器返回json格式数据
 							type: 'get', //HTTP请求类型
@@ -577,8 +580,9 @@
 																	//_this.nokDatas = quickSort(_this.currentStation.data.qualityData.nokData,"endDate1",true)
 																}
 																setLsItem('station_' + JSON.parse(getLsItem('currentStation')), JSON.stringify(_this.currentStation));
-																for(var i = 0; i < _this.currentStation.data.qualityData.nokData.length; i++) {
-																		if(_this.currentStation.data.qualityData.nokData[i].bxtm == bxtm) {
+																	windowsPrinterNOK(function(datax){
+																		for(var i = 0; i < _this.currentStation.data.qualityData.nokData.length; i++) {
+																		if(_this.currentStation.data.qualityData.nokData[i].bxtm == datax) {
 																			_this.currentStation.data.qualityData.nokData[i].bprintok = true;
 																			setLsItem('station_' + JSON.parse(getLsItem('currentStation')), JSON.stringify(_this.currentStation));
 																		}
@@ -595,6 +599,8 @@
 																	_this.defectInfo = _defectInfo
 																	_this.currentStation.data.qualityData.defectInfo = _defectInfo;
 																	_this.dis = false;
+																	window.location.reload(true);
+																	})
 																//console.log(data);
 																/*print2(1, function(bxtm) {
 																	for(var i = 0; i < _this.currentStation.data.qualityData.nokData.length; i++) {
@@ -672,9 +678,7 @@
 								_data.bhgsl = data.nokNum;
 								_data.bygname = _userName;
 								_data.bdefectDatas = data.bddefectInfo;
-								//console.log("tttttttttttttttt");
-								//console.log(JSON.stringify(_data));
-								print(_data, 1, function(bxtm) {
+								windowsNOkReprint(_data,function(bxtm){
 									for(var i = 0; i < _this.currentStation.data.qualityData.nokData.length; i++) {
 										if(_this.currentStation.data.qualityData.nokData[i].bxtm == bxtm) {
 											_this.currentStation.data.qualityData.nokData[i].bprintok = true;
@@ -682,22 +686,16 @@
 										}
 									}
 									//清除数据
-									_this.nowNokNum = 0
-									_this.defectNum = 0
-									//console.log('tttttttttttttttt');
-									//console.log(JSON.stringify(_this.currentStation.data.qualityData.nokData));
+									_this.nowNokNum = 0;
+									_this.defectNum = 0;
 									var _defectInfo = _this.currentStation.data.qualityData.defectInfo;
 									_defectInfo.forEach(function(item, index) {
 										item.num = 0
 									})
-
 									_this.defectInfo = _defectInfo
-									_this.currentStation.data.qualityData.defectInfo = _defectInfo
-									
-									/*var wobj = plus.webview.currentWebview();
-									wobj.reload(true);
-									wobj.show();*/
-								});
+									_this.currentStation.data.qualityData.defectInfo = _defectInfo;
+									window.location.reload(true);
+								})
 							}
 						})
 					}

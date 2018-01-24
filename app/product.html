@@ -116,6 +116,7 @@
 			<div class="btm-right div-flex-column">
 				<button type="button" v-bind:disabled="dis" class="mui-btn brbtn" @tap="ncmSub" style="background: #4cd964;"><div class="icon-zl ftsz" ></div>合格品报交</button>
 				<button type="button" class="mui-btn brbtn" @tap="endProduct" style="background: #e64b46;"><div class="icon-stop ftsz"></div>结束生产</button>
+				<button type="button" style="background: #e64b46;color: white;">切换打印机</button>
 			</div>
 			
 		</div>
@@ -147,6 +148,8 @@
 	<script type="text/javascript" src="../js/vue.min.js" ></script>
 	<script type="text/javascript" src="../js/function.js" ></script>
 	<script type="text/javascript" src="../js/static.js" ></script>
+	<script type="text/javascript" src="../js/cfprint.min.js"></script>
+	<script type="text/javascript" src="../js/cfprint_ext.js"></script>
 	<script>
 		mui.init();
 		var old_back = mui.back;
@@ -333,22 +336,17 @@
 															_this.okDatas = _this.currentStation.data.productData.okData
 														}
 														setLsItem('station_'+JSON.parse(getLsItem('currentStation')), JSON.stringify(_this.currentStation));
-														for(var i=0;i<_this.currentStation.data.productData.okData.length;i++){
-																if(_this.currentStation.data.productData.okData[i].txm == data){
-																	_this.currentStation.data.productData.okData[i].printok = true;
-																	_this.okDatas = _this.currentStation.data.productData.okData
-																	setLsItem('station_'+JSON.parse(getLsItem('currentStation')), JSON.stringify(_this.currentStation));
-																}
-															}
-														/*print2(2, function(data){
+													
+														windowsPrinter(function(datax){
 															for(var i=0;i<_this.currentStation.data.productData.okData.length;i++){
-																if(_this.currentStation.data.productData.okData[i].txm == data){
+																if(_this.currentStation.data.productData.okData[i].txm == datax){
 																	_this.currentStation.data.productData.okData[i].printok = true;
 																	_this.okDatas = _this.currentStation.data.productData.okData
 																	setLsItem('station_'+JSON.parse(getLsItem('currentStation')), JSON.stringify(_this.currentStation));
 																}
 															}
-														});*/
+															window.location.reload(true);
+														})
 														_this.dis = false;
 													}else if(item.mage == 1){
 														_this.dis = false;
@@ -539,18 +537,14 @@
 							_data.hxtm = data2.txm;
 							_data.hgsl = data2.okNum;
 							_data.hygname = _husername;
-							//console.log('================');
-							//console.log(_mac_address);
-							print(_data, 2,function(data){
+							windowsOkReprint(_data,function(data){
 								for(var i=0;i<_this.currentStation.data.productData.okData.length;i++){
 									if(_this.currentStation.data.productData.okData[i].txm == data){
 										_this.currentStation.data.productData.okData[i].printok = true;
 										setLsItem('station_'+JSON.parse(getLsItem('currentStation')), JSON.stringify(_this.currentStation));
+										window.location.reload(true);
 									}
 								}
-								/*var wobj = plus.webview.currentWebview();  
-					            	wobj.reload(true);
-					            	wobj.show();*/
 							});
 						}
 					})
