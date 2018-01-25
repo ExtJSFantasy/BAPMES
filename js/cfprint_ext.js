@@ -30,7 +30,7 @@ var _reportData = '{"template":"waybill_huaxia3.fr3","Cols":[{"type":"str","size
 var _reportData = _reportData || '';
 var _delay_send = 1000;            //发送打印服务器前延时时长,-1表示不自动发送
 var _delay_close = 1000;           //打印完成后关闭窗口的延时时长, -1则表示不关闭
-var cfprint_addr = "127.0.0.1";    //打印服务器的地址
+var cfprint_addr = getLsItem("printIp");    //打印服务器的地址
 var cfprint_port = 54321;          //打印服务器监听端口
 
 //设置对象并连接打印服务器
