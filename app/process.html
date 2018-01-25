@@ -267,18 +267,18 @@
 								<div style="font-size: x-small;">图一：</div>
 								<div style="font-size: x-small;">图二：</div>
 								<div class="img_show">
-									<img v-bind:src = item.img01 data-preview-src="" data-preview-group="1"/>
+									<img v-bind:src = item.imgUrl1 data-preview-src="" data-preview-group="1"/>
 								</div>
 								<div class="img_show">
-									<img v-bind:src = item.img02 alt="" data-preview-src="" data-preview-group="1"/>
+									<img v-bind:src = item.imgUrl2 alt="" data-preview-src="" data-preview-group="1"/>
 								</div>
 								<div style="font-size: x-small;">图三：</div>
 								<div style="font-size: x-small;">图四：</div>
 								<div class="img_show">
-									<img v-bind:src = item.img03 alt="" data-preview-src="" data-preview-group="1"/>
+									<img v-bind:src = item.imgUrl3 alt="" data-preview-src="" data-preview-group="1"/>
 								</div>
 								<div class="img_show">
-									<img v-bind:src = item.img04 alt="" data-preview-src="" data-preview-group="1"/>
+									<img v-bind:src = item.imgUrl4 alt="" data-preview-src="" data-preview-group="1"/>
 								</div>
 							</div>
 							<div class="floor_2_right">
@@ -322,15 +322,15 @@
 						<div class="floor_3">
 							<div>
 								<p style="line-height: 2;">编制(提出方)：</p>
-								<p class="signit" style="height: 20px;"><img v-bind:src = item.img05 alt="" /></p>
+								<p class="signit" style="height: 20px;"><img v-bind:src = item.imgUrl5 alt="" /></p>
 							</div>
 							<div>
 								<p style="line-height: 2;">SQ会签</p>
-								<p class="signit" style="height: 20px;"><img v-bind:src = item.img06  alt="" /></p>
+								<p class="signit" style="height: 20px;"><img v-bind:src = item.imgUrl6  alt="" /></p>
 							</div>
 							<div>
 								<p style="line-height: 2;">SQ经理批准：</p>
-								<p class="signit" style="height: 20px;"><img v-bind:src = item.img07 alt="" /></p>
+								<p class="signit" style="height: 20px;"><img v-bind:src = item.imgUrl7 alt="" /></p>
 							</div>
 							<div>
 								<p style="line-height: 2;">QD会签：</p>
@@ -386,12 +386,19 @@
 							data: {
 								rwdid: _rwdid
 							},
-							dataType: 'script', //服务器返回json格式数据
+							dataType: 'json', //服务器返回json格式数据
 							type: 'get', //HTTP请求类型
 							timeout: 60000, //超时时间设置为10秒；	              
 							success: function(data) {
-								var _data = eval(data);
+								var _data = data.data;
 								_data.forEach(function(item,index){
+									item.imgUrl1 = "http://192.168.1.70:3000" + item.imgUrl1;
+									item.imgUrl2 = "http://192.168.1.70:3000" + item.imgUrl2;
+									item.imgUrl3 = "http://192.168.1.70:3000" + item.imgUrl3;
+									item.imgUrl4 = "http://192.168.1.70:3000" + item.imgUrl4;
+									item.imgUrl5 = "http://192.168.1.70:3000" + item.imgUrl5;
+									item.imgUrl6 = "http://192.168.1.70:3000" + item.imgUrl6;
+									item.imgUrl7 = "http://192.168.1.70:3000" + item.imgUrl7;
 									for(var key in item){
 										if(item[key] == 'null' || item[key] == 'null') item[key] = '';
 									}
