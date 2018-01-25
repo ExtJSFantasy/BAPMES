@@ -1100,7 +1100,97 @@ function printter(data, callback) {
 		mui.toast("网络连接超时，请重新连接！")
 	}
 }
+//非筛选hold
+function windowsPrinterScreening(data, callback){
+	/**下面四个参数必须放在cfreport_custom.js脚本后面，以覆盖cfreport_custom.js中的默认值**/
+	var _delay_send = -1; //发送打印服务器前延时时长(毫秒)，-1表示不自动打印
+	var _delay_close = -1; //打印完成后关闭窗口的延时时长(毫秒), -1则表示不关闭
+	var cfprint_addr = '127.0.0.1'; //打印服务器监听地址
+	var cfprint_port = 54321; //打印服务器监听端口
 
+	var _obj = {};
+	_obj.Name = "Table1";
+	_obj.Cols = [];
+	_obj.Data = [];
+	var _obj2 = {};
+	_obj2.type = "str";
+	_obj2.size = 255;
+	_obj2.Name = "pname";
+	_obj2.required = false;
+	var _obj3 = {};
+	_obj3.type = "str";
+	_obj3.size = 255;
+	_obj3.Name = "pno";
+	_obj3.required = false;
+	var _obj4 = {};
+	_obj4.type = "str";
+	_obj4.size = 255;
+	_obj4.Name = "pplace";
+	_obj4.required = false;
+	var _obj5 = {};
+	_obj5.type = "str";
+	_obj5.size = 255;
+	_obj5.Name = "pcount";
+	_obj5.required = false;
+	var _obj7 = {};
+	_obj7.type = "str";
+	_obj7.size = 255;
+	_obj7.Name = "pusername";
+	_obj7.required = false;
+	var _obj8 = {};
+	_obj8.type = "str";
+	_obj8.size = 255;
+	_obj8.Name = "pclass";
+	_obj8.required = false;
+
+	var _obj9 = {};
+	_obj9.type = "str";
+	_obj9.size = 255;
+	_obj9.Name = "pbcode";
+	_obj9.required = false;
+	
+	var _obj10 = {};
+	_obj10.type = "str";
+	_obj10.size = 255;
+	_obj10.Name = "defect1";
+	_obj10.required = false;
+	var _obj11 = {};
+	_obj11.type = "str";
+	_obj11.size = 255;
+	_obj11.Name = "defect2";
+	_obj11.required = false;
+	_obj.Cols.push(_obj2);
+	_obj.Cols.push(_obj3);
+	_obj.Cols.push(_obj4);
+	_obj.Cols.push(_obj5);
+	_obj.Cols.push(_obj7);
+	_obj.Cols.push(_obj8);
+	_obj.Cols.push(_obj9);
+	_obj.Cols.push(_obj10);
+	_obj.Cols.push(_obj11);
+	var _obj6 = {};
+	_obj6.pname = data.ljname;
+	_obj6.pno = data.ljbm;
+	_obj6.pplace = "BAP";
+	_obj6.pcount = data.holdsys;
+	_obj6.pusername = data.realname;
+	_obj6.defect1 = data.holdyy;
+	_obj6.defect2 = '';
+	_obj6.pclass = "早班";
+	_obj6.pbcode = data.txm;
+	_obj.Data.push(_obj6);
+	_reportData3.Tables.push(_obj);
+	//_reportData = _reportData2; //自动打印的数据变更名称是 _reportData ，所以这里重新赋值一下
+	sendMsg(_reportData3);
+	cfprint.onmessage = function(evn) {
+		cfprint.log('收到消息！"' + evn.data + '"', evn);
+		var resp = JSON && JSON.parse(evn.data) || $.parseJSON(evn.data); //解析服务器返回数据
+		//console.log(resp);
+		if(resp.result == 1) {
+			callback();
+		}
+	}
+}
 //合格品打印
 function windowsPrinter(callback) {
 	var _data = JSON.parse(getLsItem('station_' + JSON.parse(getLsItem("currentStation")))).data.loginData;
