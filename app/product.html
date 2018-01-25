@@ -250,7 +250,7 @@
 				},
 				mounted: function() {
 					mui.init();
-					console.log(getLsItem("printIp"));
+					
 					mui('.mui-scroll-wrapper').scroll({
 						indicators: true //是否显示滚动条
 					});
@@ -401,7 +401,8 @@
 																		setLsItem('station_' + JSON.parse(getLsItem('currentStation')), JSON.stringify(_this.currentStation));
 																	}
 																}
-																window.location.reload(true);
+																window.parent.frames.location.reload();
+																//window.location.reload(true);
 															})
 															_this.dis = false;
 														} else if(item.mage == 1) {
@@ -599,7 +600,8 @@
 											if(_this.currentStation.data.productData.okData[i].txm == data) {
 												_this.currentStation.data.productData.okData[i].printok = true;
 												setLsItem('station_' + JSON.parse(getLsItem('currentStation')), JSON.stringify(_this.currentStation));
-												window.location.reload(true);
+												window.parent.frames.location.reload();
+												//window.location.reload(true);
 											}
 										}
 									});

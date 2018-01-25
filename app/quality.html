@@ -379,14 +379,26 @@
 							timeout: 10000, //超时时间设置为10秒；	              
 							success: function(data) {
 								var _data = data.data;
-								//console.log("===========", _data);
-								for(var i = 0; i < _data.length; i++) { //为data增加num，num1,showFlow,input3属性
-									_data[i].num = 0;
+								var _defectNames = _data[0].screeningReworkContent.split(",");
+								var _defectIds = _data[0].screeningReworkContentSubIds.split(",");
+								var _arr = [];
+								var _arr2 = [];
+								for(var i=0;i<_defectNames.length;i++){
+									var _obj = {};
+										_obj.defect = _defectNames[i];
+										_arr.push(_obj);
 								}
+								for(var k=0;k<_defectIds.length;k++){
+									for(var m=0;m<_arr.length;m++){
+										if(k==m){
+											_arr[m].defectId = _defectIds[k]
+											_arr[m].num = 0;
+										}
+									}	
+								}
+								_this.currentStation.data.qualityData.defectInfo = _arr
 
-								_this.currentStation.data.qualityData.defectInfo = _data
-
-								_this.defectInfo = _data
+								_this.defectInfo = _arr
 							},
 							error: function(xhr, type, errorThrown) {
 								//异常处理；
@@ -612,7 +624,8 @@
 																_this.defectInfo = _defectInfo
 																_this.currentStation.data.qualityData.defectInfo = _defectInfo;
 																_this.dis = false;
-																window.location.reload(true);
+																window.parent.frames.location.reload();
+																//window.location.reload(true);
 															})
 														} else if(item.mage == 1) {
 															_this.dis = false;
@@ -696,7 +709,8 @@
 										})
 										_this.defectInfo = _defectInfo
 										_this.currentStation.data.qualityData.defectInfo = _defectInfo;
-										window.location.reload(true);
+										window.parent.frames.location.reload();
+										//window.location.reload(true);
 									})
 								}
 							})
