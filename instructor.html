@@ -302,13 +302,13 @@
 							timeout: 60000, //超时时间设置为10秒；	              
 							success: function(data) {
 								data.data.forEach(function(item, index) {
-									item.imgUrl1 = "http://192.168.1.70:3000" + item.imgUrl1;
-									item.imgUrl2 = "http://192.168.1.70:3000" + item.imgUrl2;
-									item.imgUrl3 = "http://192.168.1.70:3000" + item.imgUrl3;
-									item.imgUrl4 = "http://192.168.1.70:3000" + item.imgUrl4;
-									item.imgUrl5 = "http://192.168.1.70:3000" + item.imgUrl5;
-									item.imgUrl6 = "http://192.168.1.70:3000" + item.imgUrl6;
-									item.imgUrl7 = "http://192.168.1.70:3000" + item.imgUrl7;
+									item.imgUrl1 = imgurl + item.imgUrl1;
+									item.imgUrl2 = imgurl + item.imgUrl2;
+									item.imgUrl3 = imgurl + item.imgUrl3;
+									item.imgUrl4 = imgurl + item.imgUrl4;
+									item.imgUrl5 = imgurl + item.imgUrl5;
+									item.imgUrl6 = imgurl + item.imgUrl6;
+									item.imgUrl7 = imgurl + item.imgUrl7;
 									for(var key in item) {
 										if(item[key] == 'null' || item[key] == 'undefined') item[key] = '';
 									}
