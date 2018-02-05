@@ -49,6 +49,14 @@
 				width: 90%;
 				height: 90%;
 			}
+			
+			.mui-checkbox label,
+			.mui-radio label {
+				display: inline-block;
+				float: none;
+				width: 35%;
+				padding-right: 58px;
+			}
 		</style>
 	</head>
 
@@ -63,7 +71,9 @@
 				<form class="mui-input-group">
 					<div class="mui-input-row mui-radio my-radio-input-height" v-for="(item,index) in stations">
 						<label v-text="item.sname" class="my-label-padding"></label>
-						<input class="rds my-radio-input-padding" name="rds" type="radio" v-bind:value="item.sid">
+						<input style="    width: 65%;
+    height: 100%;
+    text-align: right;" class="rds my-radio-input-padding" name="rds" type="radio" v-bind:value="item.sid">
 					</div>
 				</form>
 			</div>
@@ -93,6 +103,7 @@
 		<script type="text/javascript" src="js/static.js"></script>
 		<script type="text/javascript">
 			mui.init();
+
 			function plusReady() {
 				//当前客户端版本号
 				var curVer;
@@ -106,7 +117,7 @@
 				mounted: function() {
 					mui('#popover').popover('toggle');
 					//初始化为合格品打印机ip
-					setLsItem('printIp','192.168.11.11');
+					setLsItem('printIp', '192.168.3.111');
 					this.initStation();
 				},
 				methods: {
