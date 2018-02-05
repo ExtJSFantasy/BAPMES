@@ -229,7 +229,6 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
 		<script src="js/mui.min.js"></script>
 		<script type="text/javascript" src="js/vue.min.js"></script>
@@ -337,9 +336,9 @@
 					//点击每一项的打印
 					outPrint: function(data) {
 						//console.log(data);
-						if(getLsItem("printIp") != '192.168.11.6') {
+						if(getLsItem("printIp") != '192.168.3.135') {
 							//mui.toast()
-							setLsItem("printIp", '192.168.11.6');
+							setLsItem("printIp", '192.168.3.135');
 							mui.alert('切换打印机', '切换打印机', '确定', function(e) {
 								if(e.index == 0) {
 									window.location.reload(true);
@@ -361,9 +360,9 @@
 					},
 					//打印成功再次打条码
 					outPrintAgain: function(data) {
-						if(getLsItem("printIp") != '192.168.11.6') {
+						if(getLsItem("printIp") != '192.168.3.135') {
 							//mui.toast()
-							setLsItem("printIp", '192.168.11.6');
+							setLsItem("printIp", '192.168.3.135');
 							mui.alert('切换打印机', '切换打印机', '确定', function(e) {
 								if(e.index == 0) {
 									window.location.reload(true);
@@ -377,9 +376,9 @@
 					},
 					//补打条码
 					outPrintLatePlay: function(data) {
-						if(getLsItem("printIp") != '192.168.11.6') {
+						if(getLsItem("printIp") != '192.168.3.135') {
 							//mui.toast()
-							setLsItem("printIp", '192.168.11.6');
+							setLsItem("printIp", '192.168.3.135');
 							mui.alert('切换打印机', '切换打印机', '确定', function(e) {
 								if(e.index == 0) {
 									window.location.reload(true);
