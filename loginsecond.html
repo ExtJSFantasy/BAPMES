@@ -170,7 +170,13 @@
 										_obj.ljsl = data2[0].ljsl;
 										_obj.ygname = data2[0].ygname;
 										_this.currentStation.data.material.mdetails.push(_obj);
-										clicked("app/main.html", true, true,{},{});
+										mui.openWindow(
+											{
+												url:'app/main.html',
+												id:'main'
+											}
+										)
+										//clicked("app/main.html", true, true,{},{});
 									}else if(item.mage == '1') {
 										mui.toast('人员码无效');
 										mask.close();
