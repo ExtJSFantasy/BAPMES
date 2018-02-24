@@ -63,10 +63,10 @@
 						<label>
 							<span class="icon-truck"></span>
 						</label>
-						<input type="text" id="mterialid" v-model="val2"  placeholder="请扫入物料码" />
-						<div class="mui-switch mui-switch-blue" @tap="clearmaterial">
+						<input type="text" class="mui-input-clear" id="mterialid" v-model="val2" onkeyup="if(event.keyCode !=37 && event.keyCode != 39)value=value.replace(/[^\w\.\/]/ig,'')"  placeholder="请扫入物料码" />
+						<!--<div class="mui-switch mui-switch-blue" @tap="clearmaterial">
 							<div class="mui-switch-handle"></div>
-						</div>
+						</div>-->
 					</div>
 					<button id="register"  @tap="begining" type="button" class="mui-btn mui-btn-green my-start-product" >开始生产</button>
 				</form>
