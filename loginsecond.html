@@ -33,10 +33,10 @@
 						<label>
 							<span class="icon-truck"></span>
 						</label>
-						<input type="text" id="mterialid" v-model="val2" @keydown.enter='testmaterial' placeholder="请扫入物料码" autofocus/>
-						<div class="mui-switch mui-switch-blue" @tap="clearmaterial">
+						<input type="text" class="mui-input-clear" id="mterialid" v-model="val2" @keydown.enter='testmaterial' placeholder="请扫入物料码" autofocus/>
+						<!--<div class="mui-switch mui-switch-blue" @tap="clearmaterial">
 							<div class="mui-switch-handle"></div>
-						</div>
+						</div>-->
 					</div>
 					<button id="register"  @tap="begining" type="button" class="mui-btn mui-btn-green" style="width: 80%;margin-left: 4.5rem; margin-top: 3rem;padding-bottom: 1rem;padding-top: 1rem;border-radius: .6rem;">开始生产</button>
 				</form>
