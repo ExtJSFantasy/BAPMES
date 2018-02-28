@@ -272,8 +272,8 @@
 				methods: {
 					//合格品报交
 					ncmSub: function() {
-						if(getLsItem("printIp") != '192.168.3.111') {
-							setLsItem("printIp",'192.168.3.111');
+						if(getLsItem("printIp") != '192.168.3.150') {
+							setLsItem("printIp",'192.168.3.150');
 							mui.alert('切换打印机', '切换打印机', '确定', function(e) {
 								if(e.index == 0) {
 									window.location.reload(true);
@@ -569,8 +569,8 @@
 					//补打箱条码
 					bdhgpXtm: function(data2) {
 						var _this = this;
-						if(getLsItem("printIp") != '192.168.3.111') {
-							setLsItem("printIp",'192.168.3.111');
+						if(getLsItem("printIp") != '192.168.3.150') {
+							setLsItem("printIp",'192.168.3.150');
 							mui.alert('切换打印机', '切换打印机', '确定', function(e) {
 								if(e.index == 0) {
 									window.location.reload(true);
