@@ -333,6 +333,30 @@
 				},
 				mounted: function() {
 					var _this = this;
+//					if(cfprint.state() !== cfprint.OPEN) {
+//						/**
+//						 * 捕获连接不成功事件
+//						 */
+//						cfprint.onclose = function(evn) {
+//							//console.log('与服务器连接中断或无法连接，请确认康虎云报表服务器已启动');
+//							//cfprint.log('与服务器连接中断或无法连接，请确认康虎云报表服务器已启动', evn);
+//							mui.alert('与服务器连接中断或无法连接，请确认康虎云报表服务器已启动', "EQMS", "确定", function(e) {
+//								if(e.index == 0) {
+//
+//									window.location.reload(true);
+//								}
+//							});
+//						}
+//						cfprint.open(); //重新连接，该函数在cfprint_ext.js中
+//						/**
+//						 * 捕获连接成功事件
+//						 */
+//						cfprint.onopen = function(evn) {
+//							cfprint.log('与服务器连接成功。服务器已正常启动。', evn);
+//						}
+//					} else {
+//						cfprint.log('与服务器连接正常。');
+//					}
 					var _taskInfo2 = JSON.parse(getLsItem('station_' + JSON.parse(getLsItem("currentStation")))).data.taskInfo;
 					if(_taskInfo2.e == 1) {
 						_this.isPC = true;
@@ -460,9 +484,9 @@
 						console.log(getLsItem("printIp"));
 						var _this = this;
 						//判断是否是不合格品打印机
-						if(getLsItem("printIp") != '192.168.3.151') {
+						if(getLsItem("printIp") != _hprintip) {
 							//mui.toast()
-							setLsItem("printIp",'192.168.3.151');
+							setLsItem("printIp",_hprintip);
 							mui.alert('切换打印机', '切换打印机', '确定', function(e) {
 								if(e.index == 0) {
 									window.location.reload(true);
@@ -663,9 +687,9 @@
 					bdhgpXtm: function(index, data) {
 						var _this = this;
 						//判断是否是不合格品打印机
-						if(getLsItem("printIp") != '192.168.3.151') {
+						if(getLsItem("printIp") != _hprintip) {
 							//mui.toast()
-							setLsItem("printIp",'192.168.3.151');
+							setLsItem("printIp",_hprintip);
 							mui.alert('切换打印机', '切换打印机', '确定', function(e) {
 								if(e.index == 0) {
 									window.location.reload(true);

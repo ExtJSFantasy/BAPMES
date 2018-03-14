@@ -42,11 +42,16 @@
 		    .my-item-flex{
 		    	flex: 1;
 		    }
+		    .md-title-back {
+				width: 5vh;
+				font-size: 4vh;
+			}
 		</style>
 	</head>
 
 	<body onresize="document.activeElement.scrollIntoView(true);">
 		<div id="box" >
+			<a class="md-title-back mui-icon mui-icon-left-nav mui-pull-left" @click="onTapBack"></a>
 			<div class="mui-content-padded">
 				<div class="span-ljbh">零件编号:<span v-text="taskInfo.b"></span></div>
 				<form class="mui-input-group">
@@ -364,6 +369,9 @@
 								})
 							}
 						})
+					},
+					onTapBack: function() {
+						mui.back();
 					}
 				}
 			});

@@ -83,10 +83,13 @@
 					<div class="mui-scroll" style="height: 100%;">
 						<ul class="mui-table-view" style="margin: 1rem;color: red;font-size: 2rem;">
 							<li class="mui-table-view-cell">
-								<span id="">1.检测打印机是否打开</span>
+								<span id="">1.检测两台打印机是否打开</span>
 							</li>
 							<li class="mui-table-view-cell">
 								<span id="">2.碳带是否足够</span>
+							</li>
+							<li class="mui-table-view-cell">
+								<span id="">3.连接打印机的pad工作期间保持常亮！！！</span>
 							</li>
 						</ul>
 						<div class="" style="position: absolute;bottom: 1rem;right: 1rem;" @tap="onTapLook">
@@ -117,7 +120,8 @@
 				mounted: function() {
 					mui('#popover').popover('toggle');
 					//初始化为合格品打印机ip
-					setLsItem('printIp', '192.168.3.150');
+					setLsItem('printIp', _gprintip);
+					
 					this.initStation();
 				},
 				methods: {

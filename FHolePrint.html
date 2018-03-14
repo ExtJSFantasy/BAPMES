@@ -234,6 +234,8 @@
 		<script type="text/javascript" src="js/vue.min.js"></script>
 		<script type="text/javascript" src="js/function.js"></script>
 		<script type="text/javascript" src="js/static.js"></script>
+		<script type="text/javascript" src="js/cfprint.min.js"></script>
+		<script type="text/javascript" src="js/cfprint_ext.js"></script>
 		<script>
 			mui.init({
 				swipeBack: false
@@ -336,9 +338,9 @@
 					//点击每一项的打印
 					outPrint: function(data) {
 						//console.log(data);
-						if(getLsItem("printIp") != '192.168.3.151') {
+						if(getLsItem("printIp") != _hprintip) {
 							//mui.toast()
-							setLsItem("printIp", '192.168.3.151');
+							setLsItem("printIp", _hprintip);
 							mui.alert('切换打印机', '切换打印机', '确定', function(e) {
 								if(e.index == 0) {
 									window.location.reload(true);
@@ -360,9 +362,9 @@
 					},
 					//打印成功再次打条码
 					outPrintAgain: function(data) {
-						if(getLsItem("printIp") != '192.168.3.151') {
+						if(getLsItem("printIp") != _hprintip) {
 							//mui.toast()
-							setLsItem("printIp", '192.168.3.151');
+							setLsItem("printIp", _hprintip);
 							mui.alert('切换打印机', '切换打印机', '确定', function(e) {
 								if(e.index == 0) {
 									window.location.reload(true);
@@ -376,9 +378,9 @@
 					},
 					//补打条码
 					outPrintLatePlay: function(data) {
-						if(getLsItem("printIp") != '192.168.3.151') {
+						if(getLsItem("printIp") != _hprintip) {
 							//mui.toast()
-							setLsItem("printIp", '192.168.3.151');
+							setLsItem("printIp", _hprintip);
 							mui.alert('切换打印机', '切换打印机', '确定', function(e) {
 								if(e.index == 0) {
 									window.location.reload(true);

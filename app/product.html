@@ -250,7 +250,30 @@
 				},
 				mounted: function() {
 					mui.init();
-					
+//					if(cfprint.state() !== cfprint.OPEN) {
+//						/**
+//						 * 捕获连接不成功事件
+//						 */
+//						cfprint.onclose = function(evn) {
+//							//console.log('与服务器连接中断或无法连接，请确认康虎云报表服务器已启动');
+//							//cfprint.log('与服务器连接中断或无法连接，请确认康虎云报表服务器已启动', evn);
+//							mui.alert('与服务器连接中断或无法连接，请确认康虎云报表服务器已启动', "EQMS", "确定", function(e) {
+//								if(e.index == 0) {
+//
+//									window.location.reload(true);
+//								}
+//							});
+//						}
+//						cfprint.open(); //重新连接，该函数在cfprint_ext.js中
+//						/**
+//						 * 捕获连接成功事件
+//						 */
+//						cfprint.onopen = function(evn) {
+//							cfprint.log('与服务器连接成功。服务器已正常启动。', evn);
+//						}
+//					} else {
+//						cfprint.log('与服务器连接正常。');
+//					}
 					mui('.mui-scroll-wrapper').scroll({
 						indicators: true //是否显示滚动条
 					});
@@ -272,8 +295,8 @@
 				methods: {
 					//合格品报交
 					ncmSub: function() {
-						if(getLsItem("printIp") != '192.168.3.150') {
-							setLsItem("printIp",'192.168.3.150');
+						if(getLsItem("printIp") != _gprintip) {
+							setLsItem("printIp", _gprintip);
 							mui.alert('切换打印机', '切换打印机', '确定', function(e) {
 								if(e.index == 0) {
 									window.location.reload(true);
@@ -569,8 +592,9 @@
 					//补打箱条码
 					bdhgpXtm: function(data2) {
 						var _this = this;
-						if(getLsItem("printIp") != '192.168.3.150') {
-							setLsItem("printIp",'192.168.3.150');
+						if(getLsItem("printIp") != _gprintip) {
+							//setLsItem("printIp",'192.168.3.150');
+							setLsItem("printIp", _gprintip);
 							mui.alert('切换打印机', '切换打印机', '确定', function(e) {
 								if(e.index == 0) {
 									window.location.reload(true);
